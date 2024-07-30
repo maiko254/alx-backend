@@ -27,7 +27,7 @@ users = {
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Get the locale from the request or user preferred locale"""
     if 'locale' in request.args and request.args['locale'] in \
             app.config['LANGUAGES']:
@@ -40,7 +40,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """Get the timezone from the request"""
     if 'timezone' in request.args:
         try:
