@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ home_title }}</title>
+    <title>{{ _('home_title') }}</title>
 </head>
 <body>
     <header>
-	    <h1>{{ home_header }}</h1>
-	    {% if user %}
-                <p>Logged in as: {{ user.name }}</p>
-            {% else %}
-                <p>You are not logged in.</p>
-            {% endif %}
+	    <h1>{{ _('home_header') }}</h1>
+	    <p>
+              {% if g.user %}
+              {{ _('logged_in_as', username=g.user.name) }}
+              {% else %}
+              {{ _('not_logged_in') }}
+              {% endif %}
+            </p>
     </header>
 </body>
 </html>

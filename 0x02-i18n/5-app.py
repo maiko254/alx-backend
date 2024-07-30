@@ -3,8 +3,17 @@
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, gettext as _
 
+
+class Config:
+    """Supported languages definitions"""
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
 app = Flask(__name__)
-babel = Babel(app, default_locale='en', default_timezone='UTC')
+app.config.from_object(Config)
+babel = Babel(app)
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -21,14 +30,6 @@ def get_locale():
             app.config['LANGUAGES']:
         return request.args['locale']
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-class Config:
-    """Supported languages definitions"""
-    LANGUAGES = ["en", "fr"]
-
-
-app.config.from_object(Config)
 
 
 def get_user():
@@ -48,11 +49,8 @@ def before_request():
 @app.route('/')
 def index():
     """Render the index.html template"""
-    title = _('Welcome to Holberton')
-    header = _('Hello world!')
-    return render_template('5-index.html',
-                           home_title=title, home_header=header, user=g.user)
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port='5000')
