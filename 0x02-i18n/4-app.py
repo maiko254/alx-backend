@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""Flask app implementing locale translation"""
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext as _
 
