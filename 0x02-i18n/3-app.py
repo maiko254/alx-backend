@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""Flask app with language translations"""
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext as _
 
@@ -12,6 +14,7 @@ def get_locale():
 
 
 class Config:
+    """Class defining supported languages"""
     LANGUAGES = ["en", "fr"]
 
 

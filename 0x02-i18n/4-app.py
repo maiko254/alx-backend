@@ -17,6 +17,7 @@ def get_locale():
 
 
 class Config:
+    """Supported languages definitions"""
     LANGUAGES = ["en", "fr"]
 
 
