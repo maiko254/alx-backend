@@ -56,7 +56,7 @@ def get_timezone() -> str:
         except UnknownTimeZoneError:
             pass
 
-    return 'UTC'
+    return app.config['BABEL_DEFAULT_TIMEZONE']
 
 
 def get_user():
