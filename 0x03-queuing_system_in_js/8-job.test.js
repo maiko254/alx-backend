@@ -1,6 +1,5 @@
-const chai = require('chai');
-const expect = chai.expect;
-const sinon = require('sinon');
+import { expect } from 'chai';
+import sinon from 'sinon';
 import { createQueue } from 'kue';
 import createPushNotificationsJobs from './8-job.js';
 
