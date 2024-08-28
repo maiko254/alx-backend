@@ -3,12 +3,13 @@ const kue = require('kue');
 const queue = kue.createQueue();
 const { createClient } = require('redis');
 const { promisify } = require('util');
+
+const client = createClient();
 const INITIAL_AVAILABLE_SEATS = 50;
+let reservationEnabled = true;
 
 const app = express();
 const port = 1245;
-
-const client = createClient();
 
 app.listen(port, () => {
   client.set('available_seats', INITIAL_AVAILABLE_SEATS);
@@ -57,13 +58,12 @@ app.get('/process', async (req, res) => {
   res.json({ status: 'Queue processing' });
 });
 
-const reservationEnabled = true;
 function reserveSeat(number) {
   client.set('available_seats', number);
 }
 
-function getCurrentAvailableSeats() {
+async function getCurrentAvailableSeats() {
   const getAsync = promisify(client.get).bind(client);
-  const availableSeats = getAsync('available_seats');
-  return availableSeats;
+  const availableSeats = await getAsync('available_seats');
+  return parseInt(availableSeats, 10);
 }
