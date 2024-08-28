@@ -67,3 +67,5 @@ async function getCurrentAvailableSeats() {
   const availableSeats = await getAsync('available_seats');
   return parseInt(availableSeats, 10);
 }
+
+export default app;
